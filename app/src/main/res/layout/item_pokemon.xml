@@ -5,15 +5,40 @@
     android:paddingHorizontal="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/pokemon_photo"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pokemon_ctx_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:background="@drawable/bg_shape_circle"
-        android:src="@drawable/demo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/pokemon_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bg_shape_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/pokemon_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NP"
+            android:textSize="24dp"
+            android:textFontWeight="800"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/pokemon_title"
@@ -23,10 +48,10 @@
         android:layout_marginEnd="15dp"
         android:text="Nombre del pokemon"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/pokemon_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/pokemon_ctx_photo"
         app:layout_constraintEnd_toStartOf="@+id/pokemon_favorite"
-        app:layout_constraintStart_toEndOf="@+id/pokemon_photo"
-        app:layout_constraintTop_toTopOf="@+id/pokemon_photo" />
+        app:layout_constraintStart_toEndOf="@+id/pokemon_ctx_photo"
+        app:layout_constraintTop_toTopOf="@+id/pokemon_ctx_photo" />
 
     <ImageView
         android:id="@+id/pokemon_favorite"
@@ -34,8 +59,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_star_border"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/pokemon_title"
+        app:layout_constraintBottom_toBottomOf="@id/pokemon_title"/>
 
     <TextView
         android:id="@+id/pokemon_divider"
@@ -43,7 +68,7 @@
         android:layout_height="2dp"
         android:layout_marginTop="5dp"
         android:background="@color/gris_claro"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_photo"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_ctx_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

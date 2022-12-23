@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.upax.androidproject.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.upax.androidproject.contracts.PokemonContract
 import com.upax.androidproject.data.remote.response.PokemonsResponse
 import com.upax.androidproject.databinding.FragmentHomeBinding
@@ -15,6 +15,7 @@ import com.upax.androidproject.presenters.PokemonPresenter
 class HomeFragment : Fragment(), PokemonContract.View {
     private lateinit var binding:  FragmentHomeBinding
     private lateinit var pokemonPresenter: PokemonPresenter
+    private lateinit var pokemonAdapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,10 @@ class HomeFragment : Fragment(), PokemonContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pokemonAdapter = PokemonAdapter(activity!!)
+        binding.pokemonRecyclerview.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        binding.pokemonRecyclerview.adapter = pokemonAdapter
+
         pokemonPresenter = PokemonPresenter(this)
         pokemonPresenter.getPokemons(0, 25)
     }
@@ -42,6 +47,7 @@ class HomeFragment : Fragment(), PokemonContract.View {
 
     override fun onResult(pokemons: PokemonsResponse) {
         Log.i("i-pokemons", "Pokemons -> ${pokemons.results.size}")
+        pokemonAdapter.setData(pokemons.results)
     }
 
     override fun onError(error: String) {

@@ -13,7 +13,17 @@ class PokemonPresenter(private var view: PokemonContract.View): PokemonContract.
         pokemonModel.getPokemons(this, offset, limit)
     }
 
+    override fun getDetailPokemon(pokemonsResponse: PokemonsResponse) {
+        TODO("Not yet implemented")
+    }
+
+
     /** PokemonContract.View */
+
+    override fun onResultPokemons(pokemons: PokemonsResponse) {
+
+    }
+
     override fun onResult(pokemons: PokemonsResponse) {
         view.onResult(pokemons)
     }

@@ -41,4 +41,8 @@ class PokemonModel: PokemonContract.Model {
         })
     }
 
+    override fun getDetailPokemon(pokemonsResponse: PokemonsResponse) {
+
+    }
+
 }
