@@ -14,7 +14,7 @@
         android:theme="@style/Theme.AndroidProject"
         tools:targetApi="31">
         <activity
-            android:name="com.upax.androidproject.MainActivity"
+            android:name="com.upax.androidproject.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

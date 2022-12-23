@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.upax.androidproject.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <!--<action
+            android:id="@+id/action_nav_from_home_to_detail"
+            app:destination="@id/DetailFragment" />-->
+
+    </fragment>
+
+    <!--<fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.upax.moviemvvm.ui.detail.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" />-->
+
+</navigation>
