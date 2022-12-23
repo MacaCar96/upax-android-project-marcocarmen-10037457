@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.upax.androidproject.R
 import com.upax.androidproject.data.remote.response.Pokemon
 import com.upax.androidproject.databinding.ItemPokemonBinding
+import com.upax.androidproject.interfaces.onClickListener
 import com.upax.androidproject.utils.ImageUtil
 
-class PokemonAdapter(context: Context): RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+class PokemonAdapter(context: Context, listener: onClickListener): RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     private var listaPokemons: List<Pokemon> = listOf()
+    private var mListener = listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
@@ -20,7 +22,7 @@ class PokemonAdapter(context: Context): RecyclerView.Adapter<PokemonAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.pokemon = listaPokemons[position]
-        holder.initData(holder.pokemon)
+        holder.initData(holder.pokemon, position)
     }
 
     override fun getItemCount(): Int {
@@ -36,7 +38,7 @@ class PokemonAdapter(context: Context): RecyclerView.Adapter<PokemonAdapter.View
         private val binding = ItemPokemonBinding.bind(itemView)
         lateinit var pokemon: Pokemon
 
-        fun initData( pokemon: Pokemon) {
+        fun initData( pokemon: Pokemon, position: Int) {
             binding.pokemonPhotoText.visibility = View.VISIBLE
             binding.pokemonTitle.text = pokemon.name
 
@@ -44,6 +46,10 @@ class PokemonAdapter(context: Context): RecyclerView.Adapter<PokemonAdapter.View
                 ImageUtil.load(binding.pokemonPhoto, pokemon.url)
                 binding.pokemonPhotoText.visibility = View.GONE
             } else { binding.pokemonPhotoText.text = pokemon.name.substring(0, 2).toUpperCase() }
+
+            binding.pokemonItem.setOnClickListener{
+                mListener.onClickItem(pokemon.url.split("/")[6].toInt(), position)
+            }
 
         }
     }

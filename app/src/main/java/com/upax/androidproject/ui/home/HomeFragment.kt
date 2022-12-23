@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.upax.androidproject.R
 import com.upax.androidproject.contracts.PokemonContract
 import com.upax.androidproject.data.remote.response.PokemonsResponse
 import com.upax.androidproject.databinding.FragmentHomeBinding
+import com.upax.androidproject.interfaces.onClickListener
 import com.upax.androidproject.presenters.PokemonPresenter
+import com.upax.androidproject.ui.detail.DetailFragment
 
-class HomeFragment : Fragment(), PokemonContract.View {
+class HomeFragment : Fragment(), onClickListener, PokemonContract.View {
     private lateinit var binding:  FragmentHomeBinding
     private lateinit var pokemonPresenter: PokemonPresenter
     private lateinit var pokemonAdapter: PokemonAdapter
@@ -32,7 +36,7 @@ class HomeFragment : Fragment(), PokemonContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pokemonAdapter = PokemonAdapter(activity!!)
+        pokemonAdapter = PokemonAdapter(activity!!, this)
         binding.pokemonRecyclerview.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.pokemonRecyclerview.adapter = pokemonAdapter
 
@@ -52,5 +56,13 @@ class HomeFragment : Fragment(), PokemonContract.View {
 
     override fun onError(error: String) {
         Log.i("i-pokemons", "Error de respuesta -> $error")
+    }
+
+    override fun onClickItem(idPokemon: Int, position: Int) {
+        findNavController().navigate(
+            R.id.action_nav_from_home_to_detail,
+            DetailFragment.getBundle(idPokemon)
+
+        )
     }
 }
