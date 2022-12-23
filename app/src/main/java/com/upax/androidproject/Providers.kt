@@ -1,6 +1,7 @@
 package com.upax.androidproject
 
 import android.content.Context
+import com.upax.androidproject.common.Constans
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,7 +11,7 @@ object RetrofitProvider {
 
     fun <Api> providesApiService(api: Class<Api>): Api {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(Constans.URL_BASE_POKEMON)
             .client(getOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

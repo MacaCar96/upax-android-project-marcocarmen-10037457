@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.upax.androidproject.R
+import com.upax.androidproject.contracts.PokemonContract
+import com.upax.androidproject.data.remote.response.PokemonsResponse
 import com.upax.androidproject.databinding.FragmentHomeBinding
+import com.upax.androidproject.presenters.PokemonPresenter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), PokemonContract.View {
     private lateinit var binding:  FragmentHomeBinding
+    private lateinit var pokemonPresenter: PokemonPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +30,19 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        pokemonPresenter = PokemonPresenter(activity!!)
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment
+    }
+
+    override fun onResult(pokemons: List<PokemonsResponse>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onError(error: String) {
+        TODO("Not yet implemented")
     }
 }
