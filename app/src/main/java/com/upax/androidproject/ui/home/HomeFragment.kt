@@ -1,6 +1,7 @@
 package com.upax.androidproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,8 @@ class HomeFragment : Fragment(), PokemonContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pokemonPresenter = PokemonPresenter(activity!!)
+        pokemonPresenter = PokemonPresenter(this)
+        pokemonPresenter.getPokemons(0, 25)
     }
 
     companion object {
@@ -38,11 +40,11 @@ class HomeFragment : Fragment(), PokemonContract.View {
         fun newInstance() = HomeFragment
     }
 
-    override fun onResult(pokemons: List<PokemonsResponse>) {
-        TODO("Not yet implemented")
+    override fun onResult(pokemons: PokemonsResponse) {
+        Log.i("i-pokemons", "Pokemons -> ${pokemons.results.size}")
     }
 
     override fun onError(error: String) {
-        TODO("Not yet implemented")
+        Log.i("i-pokemons", "Error de respuesta -> $error")
     }
 }

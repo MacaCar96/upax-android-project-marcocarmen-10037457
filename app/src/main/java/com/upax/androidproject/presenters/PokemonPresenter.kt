@@ -9,12 +9,12 @@ class PokemonPresenter(private var view: PokemonContract.View): PokemonContract.
     private val pokemonModel = PokemonModel()
 
     /** PokemonContract.Model */
-    override fun getPokemons() {
-        pokemonModel.getPokemons(this)
+    override fun getPokemons(offset: Int, limit: Int) {
+        pokemonModel.getPokemons(this, offset, limit)
     }
 
     /** PokemonContract.View */
-    override fun onResult(pokemons: List<PokemonsResponse>) {
+    override fun onResult(pokemons: PokemonsResponse) {
         view.onResult(pokemons)
     }
 
